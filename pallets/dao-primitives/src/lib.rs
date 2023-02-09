@@ -13,6 +13,8 @@ use sp_core::{crypto::AccountId32, H256};
 use sp_runtime::RuntimeDebug;
 use sp_std::prelude::*;
 
+pub type DispatchResultWithDaoOrigin<T> = Result<DaoOrigin<T>, DispatchError>;
+
 #[derive(
 	Encode, Decode, Default, Clone, PartialEq, TypeInfo, RuntimeDebug, Serialize, Deserialize,
 )]
@@ -300,11 +302,11 @@ pub trait ApprovePropose<DaoId, AccountId, TokenSupply, Hash> {
 
 impl ApprovePropose<u32, AccountId32, u128, H256> for () {
 	fn approve_propose(
-		dao_id: u32,
-		threshold: u128,
-		block_number: u32,
-		hash: H256,
-		approve: bool,
+		_dao_id: u32,
+		_threshold: u128,
+		_block_number: u32,
+		_hash: H256,
+		_approve: bool,
 	) -> Result<(), DispatchError> {
 		Ok(())
 	}
@@ -315,7 +317,7 @@ pub trait ApproveVote<DaoId, AccountId, Hash> {
 }
 
 impl ApproveVote<u32, AccountId32, H256> for () {
-	fn approve_vote(dao_id: u32, hash: H256, approve: bool) -> Result<(), DispatchError> {
+	fn approve_vote(_dao_id: u32, _hash: H256, _approve: bool) -> Result<(), DispatchError> {
 		Ok(())
 	}
 }
